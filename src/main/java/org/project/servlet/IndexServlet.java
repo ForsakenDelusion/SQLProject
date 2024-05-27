@@ -25,14 +25,14 @@ public class IndexServlet extends HttpServlet {
         Fixer fixer = (Fixer) req.getSession().getAttribute("fixer");
 
         if (admin != null) {
-            whoami = "admin";
+            whoami = "管理员";
             context.setVariable("whoami", whoami);
         } else if (user != null) {
-            whoami = "user";
+            whoami = "用户";
             context.setVariable("whoami", whoami);
             context.setVariable("user", user.getUname());
         } else {
-            whoami = "fixer";
+            whoami = "维修工";
             context.setVariable("whoami", whoami);
             context.setVariable("fixer", fixer.getFName());
         }
