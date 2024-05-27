@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.project.entity.Admin;
+import org.project.entity.Fixer;
 import org.project.entity.User;
 import org.project.utils.ThymeleafUtil;
 import org.thymeleaf.context.Context;
@@ -21,14 +22,19 @@ public class IndexServlet extends HttpServlet {
         String whoami;
         Admin admin = (Admin) req.getSession().getAttribute("admin");
         User user = (User) req.getSession().getAttribute("user");
+        Fixer fixer = (Fixer) req.getSession().getAttribute("fixer");
 
-        if (admin == null) {
-            whoami = "用户";
+        if (admin != null) {
+            whoami = "admin";
             context.setVariable("whoami", whoami);
-            context.setVariable("name", user.getUname());
+        } else if (user != null) {
+            whoami = "user";
+            context.setVariable("whoami", whoami);
+            context.setVariable("user", user.getUname());
         } else {
-            whoami = "管理员";
+            whoami = "fixer";
             context.setVariable("whoami", whoami);
+            context.setVariable("fixer", fixer.getFName());
         }
 
 

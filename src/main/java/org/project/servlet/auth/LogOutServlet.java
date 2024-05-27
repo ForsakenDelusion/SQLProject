@@ -14,7 +14,10 @@ public class LogOutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getSession().getAttribute("user") != null) {
             req.getSession().removeAttribute("user");
-        } req.getSession().removeAttribute("admin");
+        } else if (req.getSession().getAttribute("admin") != null) {
+            req.getSession().removeAttribute("admin");
+        } req.getSession().removeAttribute("fixer");
+
 
         resp.sendRedirect("login");
     }

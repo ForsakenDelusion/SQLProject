@@ -3,6 +3,7 @@ package org.project.dao;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.project.entity.Admin;
+import org.project.entity.Fixer;
 import org.project.entity.User;
 
 public interface UserMapper {
@@ -13,4 +14,6 @@ public interface UserMapper {
     @Select("select * from Admin where Aid = #{Aid} and Apassword = #{Apassword}")
     Admin getAdmin(@Param("Aid") String Aid, @Param("Apassword") String Apassword);
 
+    @Select("select * from Fixer where Fid = #{Fid} and Fpassword = #{Fpassword}")
+    Fixer getFixer(@Param("Fid") String Fid, @Param("Fpassword") String Fpassword);
 }
