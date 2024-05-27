@@ -23,6 +23,8 @@ Author:
     --error: #ff592c;
     --success: #44de4f;
     --main-color: #11a1fd;
+    --main-focus: #0a5378;
+    --main-hover: #555555;
     --color1: #efb5a3;
     --color2: #315f72;
 }
@@ -120,14 +122,19 @@ iframe {
     position: relative;
     overflow: hidden;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
 }
 
-.ad-btn:hover,
+.ad-btn:hover {
+    color: var(--main-white);
+    border-radius: 5px;
+    transition: .4s all
+}
 .ad-btn:focus {
     color: var(--main-white);
-    background: var(--main-color);
+    background: var(--main-focus);
 }
+
 
 .ad-color {
     color: var(--main-color);
