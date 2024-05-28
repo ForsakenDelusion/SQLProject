@@ -16,6 +16,6 @@
     </environments>
 
     <mappers>
-        <mapper class="org.project.dao.UserMapper"/>
+        <package name="org.project.dao"/>
     </mappers>
 </configuration>

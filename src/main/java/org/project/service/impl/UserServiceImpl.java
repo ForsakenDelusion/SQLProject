@@ -2,10 +2,14 @@ package org.project.service.impl;
 
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
+import org.project.dao.NewestDeviceMapper;
 import org.project.entity.User;
 import org.project.dao.UserMapper;
+import org.project.entity.UserBorrowReturn;
 import org.project.service.UserService;
 import org.project.utils.MybatisUtil;
+
+import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
@@ -19,4 +23,13 @@ public class UserServiceImpl implements UserService {
             return true;
         }
     }
+
+    @Override
+    public List<UserBorrowReturn> getUserBorrowReturnDeviceList(Long Uid) {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            return mapper.getUserBorrowReturn(Uid);
+        }
+    }
+
 }

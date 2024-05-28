@@ -8,6 +8,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.project.entity.Admin;
 import org.project.entity.Fixer;
 import org.project.entity.User;
+import org.project.service.NewestDeviceService;
+import org.project.service.impl.NewestDeviceServiceImpl;
 import org.project.utils.ThymeleafUtil;
 import org.thymeleaf.context.Context;
 
@@ -15,6 +17,13 @@ import java.io.IOException;
 
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
+
+    NewestDeviceService service;
+
+    @Override
+    public void init() throws ServletException {
+        service = new NewestDeviceServiceImpl();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -37,7 +46,7 @@ public class IndexServlet extends HttpServlet {
             context.setVariable("fixer", fixer.getFName());
         }
 
-
+        context.setVariable("newest_device_list", service.getNewestDeviceList());
         ThymeleafUtil.process("index.html",context,resp.getWriter());
     }
 }
