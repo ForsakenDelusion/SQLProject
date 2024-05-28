@@ -1,4 +1,4 @@
-package org.project.servlet;
+package org.project.servlet.pages;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,8 +13,8 @@ import org.thymeleaf.context.Context;
 
 import java.io.IOException;
 
-@WebServlet("/index")
-public class IndexServlet extends HttpServlet {
+@WebServlet("/status")
+public class DeviceStatusServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -22,7 +22,7 @@ public class IndexServlet extends HttpServlet {
         String whoami;
         Admin admin = (Admin) req.getSession().getAttribute("admin");
         User user = (User) req.getSession().getAttribute("user");
-        Fixer fixer = (Fixer) req.getSession().getAttribute("fixer");
+
 
         if (admin != null) {
             whoami = "管理员";
@@ -31,13 +31,9 @@ public class IndexServlet extends HttpServlet {
             whoami = "用户";
             context.setVariable("whoami", whoami);
             context.setVariable("user", user.getUname());
-        } else {
-            whoami = "维修工";
-            context.setVariable("whoami", whoami);
-            context.setVariable("fixer", fixer.getFName());
         }
 
 
-        ThymeleafUtil.process("index.html",context,resp.getWriter());
+        ThymeleafUtil.process("devicestatus.html",context,resp.getWriter());
     }
 }
