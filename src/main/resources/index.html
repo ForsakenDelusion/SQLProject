@@ -29,7 +29,7 @@
             border-radius: 50%;
             margin-left: 5px;
         }
-        .status-light.空闲 { background-color: lawngreen; }
+        .status-light.空闲中 { background-color: lawngreen; }
         .status-light.使用中 { background-color: darkorange; }
         .status-light.维修中 { background-color: orangered; }
     </style>
@@ -284,7 +284,7 @@
                                             <td style="text-align: center;" th:text="${index_device_list.getDevice_id()}">#JH2033</td>
                                             <td style="text-align: center;" th:text="${index_device_list.getDevice_name()}">设备一号</td>
                                             <td style="text-align: center;">
-                                                <span th:text="${index_device_list.getDevice_status()}">空闲</span>
+                                                <span th:text="${index_device_list.getDevice_status()}">空闲中</span>
                                                 <span class="status-light" th:classappend="${index_device_list.getDevice_status()}"></span>
                                             </td>
                                             <td style="text-align: center;" th:text="${index_device_list.getDevice_price()}">$600</td>

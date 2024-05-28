@@ -1,9 +1,6 @@
 package org.project.dao;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.project.entity.Admin;
 import org.project.entity.Fixer;
 import org.project.entity.User;
@@ -30,4 +27,8 @@ public interface UserMapper {
     })
     @Select("select BRid,Did,Dname,BR.BRbdate from Device,BR where BRUid = #{Uid} and BRDid = Did and BRrdate IS NULL")
     List<UserBorrowReturn> getUserBorrowReturn(Long Uid);
+
+    @Update("update Device set Dstatus = '空闲中' where Did = #{Did}")
+    void returnDevice(String Did);
+
 }

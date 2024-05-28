@@ -9,5 +9,13 @@ public interface UserService {
 
     boolean auth(String Uid,String Upassword, HttpSession session );
 
+    void borrowDevice(String Uid,String Did);
+
+    String getOldestDeviceByName(String Dname);
+
+    void returnDevice(String Did);
+
     List<UserBorrowReturn> getUserBorrowReturnDeviceList(Long Uid);
+
+    List<String> getIdleDeviceName();
 }

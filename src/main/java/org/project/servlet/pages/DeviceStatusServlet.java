@@ -32,7 +32,7 @@ public class DeviceStatusServlet extends HttpServlet {
         } else if (user != null) {
             whoami = "用户";
             context.setVariable("whoami", whoami);
-            context.setVariable("user", user.getUname());
+            context.setVariable("name", user.getUname());
         }
 
         ThymeleafUtil.process("devicestatus.html",context,resp.getWriter());

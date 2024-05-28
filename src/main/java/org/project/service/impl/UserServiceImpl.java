@@ -2,7 +2,7 @@ package org.project.service.impl;
 
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
-import org.project.dao.NewestDeviceMapper;
+import org.project.dao.DeviceMapper;
 import org.project.entity.User;
 import org.project.dao.UserMapper;
 import org.project.entity.UserBorrowReturn;
@@ -25,11 +25,46 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void borrowDevice(String Uid,String Did) {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            DeviceMapper mapper = sqlSession.getMapper(DeviceMapper.class);
+            mapper.borrowDevice(Uid,Did);
+        }
+    }
+
+    @Override
+    public String getOldestDeviceByName(String Dname) {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            DeviceMapper mapper = sqlSession.getMapper(DeviceMapper.class);
+            return mapper.getOldestDeviceByName(Dname);
+        }
+    }
+
+    @Override
+    public void returnDevice(String Did) {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            mapper.returnDevice(Did);
+        }
+    }
+
+
+
+    @Override
     public List<UserBorrowReturn> getUserBorrowReturnDeviceList(Long Uid) {
         try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
             UserMapper mapper = sqlSession.getMapper(UserMapper.class);
             return mapper.getUserBorrowReturn(Uid);
         }
     }
+
+    public List<String> getIdleDeviceName() {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            DeviceMapper mapper = sqlSession.getMapper(DeviceMapper.class);
+            return mapper.getIdleDeviceName();
+        }
+    }
+
+
 
 }

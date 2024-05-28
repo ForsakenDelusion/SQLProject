@@ -39,11 +39,11 @@ public class IndexServlet extends HttpServlet {
         } else if (user != null) {
             whoami = "用户";
             context.setVariable("whoami", whoami);
-            context.setVariable("user", user.getUname());
+            context.setVariable("name", user.getUname());
         } else {
             whoami = "维修工";
             context.setVariable("whoami", whoami);
-            context.setVariable("fixer", fixer.getFName());
+            context.setVariable("name", fixer.getFName());
         }
 
         context.setVariable("newest_device_list", service.getNewestDeviceList());
