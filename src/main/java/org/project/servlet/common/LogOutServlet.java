@@ -31,9 +31,9 @@ public class LogOutServlet extends HttpServlet {
             req.getSession().removeAttribute("admin");
         } else  {
             Cookie cookie_Fid = new Cookie("Fid", "Fid");
-            cookie_Fid.setMaxAge(60 * 60 * 24 * 7);
+            cookie_Fid.setMaxAge(0);
             Cookie cookie_Fpassword = new Cookie("Fpassword", "Fpassword");
-            cookie_Fpassword.setMaxAge(60 * 60 * 24 * 7);
+            cookie_Fpassword.setMaxAge(0);
             resp.addCookie(cookie_Fid);
             resp.addCookie(cookie_Fpassword);
             req.getSession().removeAttribute("fixer");
