@@ -127,4 +127,13 @@ public class AdminServiceImpl implements AdminService {
             return mapper.getOldestFixerIdByName(Fname);
         }
     }
+
+    @Override
+    public void fixDone(String Did) {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            DeviceMapper mapper = sqlSession.getMapper(DeviceMapper.class);
+            mapper.setDeviceIdle(Did);
+            return;
+        }
+    }
 }

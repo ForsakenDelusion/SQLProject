@@ -56,4 +56,12 @@ public interface UserMapper {
     @Select("select * from Device,Maintain,Fixer where Did = MDid and MFid = Fid and MdateEnd is NULL")
     List<MaintainDevice> getMaintainDevice();
 
+    @Results({
+            @Result(column = "Mid", property = "maintain_id"),
+            @Result(column = "Did", property = "maintain_device_id"),
+            @Result(column = "Dname", property = "maintain_device_name"),
+            @Result(column = "MdateBegin", property = "maintain_begin_date"),
+    })
+    @Select("select * from Device,Maintain,Fixer where Did = MDid and MFid = Fid and Fid = #{Fid} and MdateEnd is NULL")
+    List<MaintainDevice> getMaintainDeviceByFixerId(String Fid);
 }

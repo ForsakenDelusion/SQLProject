@@ -4,6 +4,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.project.dao.DeviceMapper;
+import org.project.entity.Device;
+import org.project.entity.MaintainDevice;
 import org.project.entity.User;
 import org.project.dao.UserMapper;
 import org.project.entity.UserBorrowReturn;
@@ -25,10 +27,24 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Deprecated
     @Override
     public boolean userBanUrl(HttpServletRequest req) {//禁止用户访问的网页
         String url = req.getRequestURI();
-        return  !url.endsWith("project/selldevice") && !url.endsWith("project/changefixer") && !url.endsWith("project/status") && !url.endsWith("project/setidle") && !url.endsWith("project/setmaintain") && !url.endsWith("project/setuse") && !url.endsWith("/project/devicemaintain") && !url.endsWith("/project/devicesale");
+        return !url.endsWith("project/fixdone") && !url.endsWith("project/fixerdevicemaintain") && !url.endsWith("project/buydevice") && !url.endsWith("project/selldevice") && !url.endsWith("project/changefixer") && !url.endsWith("project/status") && !url.endsWith("project/setidle") && !url.endsWith("project/setmaintain") && !url.endsWith("project/setuse") && !url.endsWith("/project/devicemaintain") && !url.endsWith("/project/devicesale");
+    }
+
+    @Deprecated
+    @Override
+    public boolean fixerBanUrl(HttpServletRequest req) {
+        String url = req.getRequestURI();
+        return   !url.endsWith("project/returndevice") && !url.endsWith("project/add-borrow") && !url.endsWith("project/borrowreturn") && !url.endsWith("project/buydevice") && !url.endsWith("project/selldevice") && !url.endsWith("project/changefixer") && !url.endsWith("project/status") && !url.endsWith("project/setidle") && !url.endsWith("project/setmaintain") && !url.endsWith("project/setuse") && !url.endsWith("/project/devicemaintain") && !url.endsWith("/project/devicesale");
+    }
+
+    @Override
+    public boolean adminBanUrl(HttpServletRequest req) {
+        String url = req.getRequestURI();
+        return !url.endsWith("project/borrowreturn") && !url.endsWith("project/add-borrow") && !url.endsWith("project/returndevice") && !url.endsWith("project/fixerdevicemaintain") && !url.endsWith("project/fixdone") ;
     }
 
     @Override
@@ -77,6 +93,14 @@ public class UserServiceImpl implements UserService {
         try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
             UserMapper mapper = sqlSession.getMapper(UserMapper.class);
             return mapper.getUserCount();
+        }
+    }
+
+    @Override
+    public List<MaintainDevice> getMaintainDeviceByFixerId(String Fid) {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            return mapper.getMaintainDeviceByFixerId(Fid);
         }
     }
 

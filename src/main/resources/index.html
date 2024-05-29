@@ -70,16 +70,6 @@
                             </span>
                         </a>
                     </li>
-                    <li th:if="${whoami} == '管理员' or ${whoami} == '维修工'">
-                        <a href="devicemaintain">
-                            <span class="icon-menu feather-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                            </span>
-                            <span class="menu-text">
-                                设备维修
-                            </span>
-                        </a>
-                    </li>
                     <li th:if="${whoami} == '管理员'">
                         <a href="devicesale">
                             <span class="icon-menu feather-icon">
@@ -97,6 +87,26 @@
                             </span>
                             <span class="menu-text">
                                 借还设备
+                            </span>
+                        </a>
+                    </li>
+                    <li th:if="${whoami} == '管理员'">
+                        <a href="devicemaintain">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            </span>
+                            <span class="menu-text">
+                                设备维修
+                            </span>
+                        </a>
+                    </li>
+                    <li th:if="${whoami} == '维修工'">
+                        <a href="fixerdevicemaintain">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            </span>
+                            <span class="menu-text">
+                                设备维修
                             </span>
                         </a>
                     </li>
@@ -231,7 +241,7 @@
                         </div>
                     </div>
                     <!-- Start Card-->
-                    <div class="col-xl-3 col-lg-4 col-md-6">
+                    <div class="col-xl-3 col-lg-4 col-md-6"  th:if="${whoami} == '管理员' or ${whoami} == '用户'">
                         <div class="card ad-info-card">
                             <div class="card-body dd-flex align-items-center">
                                 <div class="icon-info">
@@ -246,7 +256,7 @@
                         </div>
                     </div>
                     <!-- Start Card-->
-                    <div class="col-xl-3 col-lg-4 col-md-6" th:if="${whoami} == '管理员'">
+                    <div class="col-xl-3 col-lg-4 col-md-6" th:if="${whoami} == '管理员' or ${whoami} == '维修工'">
                         <div class="card ad-info-card">
                             <div class="card-body dd-flex align-items-center">
                                 <div class="icon-info">
@@ -254,7 +264,8 @@
                                 </div>
                                 <div class="icon-info-text">
                                     <h5 class="ad-title">维修中设备</h5>
-                                    <h4 class="ad-card-title" th:text="${maintain_device}">10k</h4>
+                                    <h4 class="ad-card-title" th:text="${maintain_device}" th:if="${whoami} == '管理员'">10k</h4>
+                                    <h4 class="ad-card-title" th:text="${fixer_maintain_device}" th:if="${whoami} == '维修工'">10k</h4>
                                 </div>
                             </div>
                         </div>

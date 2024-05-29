@@ -1,4 +1,4 @@
-package org.project.servlet.auth;
+package org.project.servlet.admin.page;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package org.project.servlet.device.action;
+package org.project.servlet.admin.action;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,8 +12,9 @@ import org.thymeleaf.context.Context;
 
 import java.io.IOException;
 
-@WebServlet("/buydevice")
-public class BuyDeviceServlet extends HttpServlet {
+@WebServlet("/setmaintain")
+public class SetMaintainServlet extends HttpServlet {
+
     AdminService service;
     @Override
     public void init() throws ServletException {
@@ -24,14 +25,17 @@ public class BuyDeviceServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Context context = new Context();
         context.setVariable("whoami", "管理员");
-        ThymeleafUtil.process("buy-device.html",context,resp.getWriter());
+        context.setVariable("fixer_list", service.getAllFixer());
+        context.setVariable("Did",req.getParameter("Did"));
+        ThymeleafUtil.process("add-fixer.html",context,resp.getWriter());
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String Dname = req.getParameter("device-name");
-        String Dprice = req.getParameter("device-price");
-        service.buyDevice(Dname,Dprice);
-        resp.sendRedirect("devicesale");
+        String Did = req.getParameter("Did");//在前端用Thymeleaf获取到的Did值
+        service.setDeviceMaintain(Did);
+        String Fname = req.getParameter("fixer_name");
+        service.setDeviceFixer(Fname,Did);
+        resp.sendRedirect("status");
     }
 }

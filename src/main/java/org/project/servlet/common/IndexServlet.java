@@ -1,4 +1,4 @@
-package org.project.servlet.pages;
+package org.project.servlet.common;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -48,6 +48,7 @@ public class IndexServlet extends HttpServlet {
             whoami = "维修工";
             context.setVariable("whoami", whoami);
             context.setVariable("name", fixer.getFName());
+            context.setVariable("fixer_maintain_device", userService.getMaintainDeviceByFixerId(String.valueOf(fixer.getFid())).size());
         }
 
         context.setVariable("all_device", indexService.getDeviceCount());

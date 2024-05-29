@@ -1,15 +1,12 @@
-package org.project.servlet.device.action;
+package org.project.servlet.admin.action;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.project.dao.DeviceMapper;
 import org.project.service.AdminService;
-import org.project.service.UserService;
 import org.project.service.impl.AdminServiceImpl;
-import org.project.service.impl.UserServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;

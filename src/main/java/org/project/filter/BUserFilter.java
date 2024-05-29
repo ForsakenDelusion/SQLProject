@@ -18,6 +18,7 @@ import org.project.utils.MybatisUtil;
 
 import java.io.IOException;
 
+
 @WebFilter("/*")
 public class BUserFilter extends HttpFilter {
     @Override
@@ -27,12 +28,22 @@ public class BUserFilter extends HttpFilter {
         HttpSession session = req.getSession();
         User user = (User) session.getAttribute("user");
         Fixer fixer = (Fixer) session.getAttribute("fixer");
+        Admin admin = (Admin) session.getAttribute("admin");
 
         UserService service = new UserServiceImpl();
         boolean isBan = !service.userBanUrl(req);//调用UserService接口里的判断网页是不是禁止用户访问的方法
-
-        if((fixer!=null || user!=null ) && isBan){
-            System.out.println("我是status重定向");
+        boolean isFixerBan = !service.fixerBanUrl(req);
+        boolean isAdminBan = !service.adminBanUrl(req);
+        if(user!=null && isBan){
+            System.out.println("我是userban重定向");
+            res.sendRedirect("index");
+            return;
+        } else if(fixer!=null && isFixerBan){
+            System.out.println("我是fixerban重定向");
+            res.sendRedirect("index");
+            return;
+        } else if(admin!=null && isAdminBan) {
+            System.out.println("我是adminban重定向");
             res.sendRedirect("index");
             return;
         }

@@ -1,34 +1,37 @@
-package org.project.servlet.pages;
+package org.project.servlet.user.page;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.project.service.AdminService;
-import org.project.service.impl.AdminServiceImpl;
+import org.project.entity.User;
+import org.project.service.UserService;
+import org.project.service.impl.UserServiceImpl;
 import org.project.utils.ThymeleafUtil;
 import org.thymeleaf.context.Context;
 
 import java.io.IOException;
 
-@WebServlet("/status")
-public class DeviceStatusServlet extends HttpServlet {
+@WebServlet("/borrowreturn")
+public class BorrowReturnServlet extends HttpServlet {
 
-    AdminService service;
 
+    UserService service;
     @Override
     public void init() throws ServletException {
-        service = new AdminServiceImpl();
+        service = new UserServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Context context = new Context();
         String whoami;
-        whoami = "管理员";
+        User user = (User) req.getSession().getAttribute("user");
+        whoami = "用户";
         context.setVariable("whoami", whoami);
-        context.setVariable("device_status_list", service.getDeviceStatus());
-        ThymeleafUtil.process("devicestatus.html",context,resp.getWriter());
+        context.setVariable("name", user.getUname());
+        context.setVariable("user_borrow_return_device_list", service.getUserBorrowReturnDeviceList(user.getUid()));
+        ThymeleafUtil.process("borrowreturn.html",context,resp.getWriter());
     }
 }

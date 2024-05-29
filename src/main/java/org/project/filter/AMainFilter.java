@@ -22,10 +22,11 @@ public class AMainFilter extends HttpFilter {
             User user = (User) session.getAttribute("user");
             Admin admin = (Admin) session.getAttribute("admin");
             Fixer fixer = (Fixer) session.getAttribute("fixer");
-            System.out.println(user);
-            System.out.println(admin);
+            System.out.println("我是user"+user);
+            System.out.println("我是admin"+admin);
+            System.out.println("我是fixer"+fixer);
             if (user == null && admin == null && fixer == null ){//如果用户没登陆，就重定向
-                System.out.println("我是重定向");
+                System.out.println("我是登录检测重定向");
                 res.sendRedirect("/project/login");
                 return;
             }

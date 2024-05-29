@@ -1,4 +1,4 @@
-package org.project.servlet.device.action;
+package org.project.servlet.admin.action;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,7 +7,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.project.service.AdminService;
 import org.project.service.impl.AdminServiceImpl;
-import org.project.utils.ThymeleafUtil;
 import org.thymeleaf.context.Context;
 
 import java.io.IOException;
@@ -23,7 +22,6 @@ public class ChangeFixerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Context context = new Context();
         String Did = req.getParameter("Did");
         String Fname = req.getParameter("Fname");
         service.changefixer(Did,Fname);

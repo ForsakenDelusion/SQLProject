@@ -33,4 +33,6 @@ public interface AdminService {
     void changefixer(String Did,String Fname);
 
     String getOldestFixerIdByName(String Fname);
+
+    void fixDone(String Did);
 }

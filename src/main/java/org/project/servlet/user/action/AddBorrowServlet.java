@@ -1,4 +1,4 @@
-package org.project.servlet.device;
+package org.project.servlet.user.action;
 
 
 import jakarta.servlet.ServletException;

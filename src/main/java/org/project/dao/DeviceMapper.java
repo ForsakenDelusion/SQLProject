@@ -64,4 +64,5 @@ public interface DeviceMapper {
 
     @Update("update Maintain set MFid = #{Fid} where MDid = #{Did} and MdateEnd is NULL")
     void changeDeviceFixer(@Param("Did")String Did,@Param("Fid") String Fid);
+
 }

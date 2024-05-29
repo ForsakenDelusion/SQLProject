@@ -1,13 +1,11 @@
-package org.project.servlet.auth;
+package org.project.servlet.fixer.page;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.project.service.AdminService;
 import org.project.service.FixerService;
-import org.project.service.impl.AdminServiceImpl;
 import org.project.service.impl.FixerServiceImpl;
 import org.project.utils.ThymeleafUtil;
 import org.thymeleaf.context.Context;
