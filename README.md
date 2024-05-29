@@ -1,3 +1,7 @@
+# 简介
+安徽理工大学数据库课设--设备管理系统
+基于JavaWeb技术实现
+
 # 技术栈
 Mybatis,Thymeleaf,Servlet,Mysql,Maven
 
