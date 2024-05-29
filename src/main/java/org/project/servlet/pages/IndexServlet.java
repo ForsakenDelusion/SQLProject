@@ -8,8 +8,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.project.entity.Admin;
 import org.project.entity.Fixer;
 import org.project.entity.User;
-import org.project.service.NewestDeviceService;
-import org.project.service.impl.NewestDeviceServiceImpl;
+import org.project.service.IndexService;
+import org.project.service.UserService;
+import org.project.service.impl.IndexServiceImpl;
+import org.project.service.impl.UserServiceImpl;
 import org.project.utils.ThymeleafUtil;
 import org.thymeleaf.context.Context;
 
@@ -18,11 +20,12 @@ import java.io.IOException;
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
 
-    NewestDeviceService service;
-
+    IndexService indexService;
+    UserService userService;
     @Override
     public void init() throws ServletException {
-        service = new NewestDeviceServiceImpl();
+        indexService = new IndexServiceImpl();
+        userService = new UserServiceImpl();
     }
 
     @Override
@@ -46,7 +49,11 @@ public class IndexServlet extends HttpServlet {
             context.setVariable("name", fixer.getFName());
         }
 
-        context.setVariable("newest_device_list", service.getNewestDeviceList());
+        context.setVariable("all_device", indexService.getDeviceCount());
+        context.setVariable("all_user", userService.getUserCount());
+        context.setVariable("using_device", indexService.getUsingDeviceCount());
+        context.setVariable("maintain_device", indexService.getMaintainDeviceCount());
+        context.setVariable("newest_device_list", indexService.getNewestDeviceList());
         ThymeleafUtil.process("index.html",context,resp.getWriter());
     }
 }

@@ -4,6 +4,14 @@ import org.project.entity.Device;
 
 import java.util.List;
 
-public interface NewestDeviceService {
+public interface IndexService {
     List<Device> getNewestDeviceList();
+
+    int getDeviceCount();
+
+    int getUsingDeviceCount();
+
+    int getMaintainDeviceCount();
+
+
 }

@@ -45,4 +45,13 @@ public interface DeviceMapper {
 
     @Update("update Maintain set MFid = #{Fid} where MDid = #{MDid}")
     void setFixerId(@Param("Fid") String Fid,@Param("MDid") String MDid);
+
+    @Select("select count(*) from Device")
+    int getDeviceCount();
+
+    @Select("select count(*) from Device where Dstatus = '使用中'")
+    int getUsingDeviceCount();
+
+    @Select("select count(*) from Device where Dstatus = '维修中'")
+    int getMaintainDeviceCount();
 }

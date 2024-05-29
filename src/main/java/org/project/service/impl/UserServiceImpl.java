@@ -72,6 +72,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
+    @Override
+    public int getUserCount() {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            return mapper.getUserCount();
+        }
+    }
 
 }

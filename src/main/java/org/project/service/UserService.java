@@ -21,4 +21,6 @@ public interface UserService {
     List<UserBorrowReturn> getUserBorrowReturnDeviceList(Long Uid);
 
     List<String> getIdleDeviceName();
+
+    int getUserCount();
 }

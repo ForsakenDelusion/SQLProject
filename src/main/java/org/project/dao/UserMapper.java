@@ -22,6 +22,9 @@ public interface UserMapper {
     @Select("select * from Fixer")
     List<Fixer> getAllFixer();
 
+    @Select("select count(*) from User")
+    int getUserCount();
+
     @Results({
             @Result(column = "BRid", property = "borrow_id"),
             @Result(column = "Did", property = "borrow_device_id"),
