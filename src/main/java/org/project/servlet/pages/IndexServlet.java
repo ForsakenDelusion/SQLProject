@@ -43,6 +43,7 @@ public class IndexServlet extends HttpServlet {
             whoami = "用户";
             context.setVariable("whoami", whoami);
             context.setVariable("name", user.getUname());
+            context.setVariable("user_using_device", userService.getUserBorrowReturnDeviceList(user.getUid()).size());
         } else {
             whoami = "维修工";
             context.setVariable("whoami", whoami);

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zxx" xmlns:th="http://www.thymeleaf.org">
+<!--<![endif]-->
+<!-- Begin Head -->
+
+<head>
+    <title>SplashDash</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <meta name="MobileOptimized" content="320">
+    <!--Start Style -->
+    <link rel="stylesheet" type="text/css" href="static/css/fonts.css">
+    <link rel="stylesheet" type="text/css" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/icofont.min.css">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" id="theme-change" type="text/css" href="">
+    <style>
+        .status-light {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+        .status-light.空闲中 { background-color: lawngreen; }
+        .status-light.使用中 { background-color: darkorange; }
+        .status-light.维修中 { background-color: orangered; }
+    </style>
+</head>
+
+<body>
+<div class="loader">
+    <div class="spinner">
+        <img src="static/picture/loader.gif" alt="">
+    </div>
+</div>
+<!-- Main Body -->
+<div class="page-wrapper">
+    <!-- Header Start -->
+    <div th:replace="header.html::title"></div>
+    <!-- Sidebar Start -->
+    <aside class="sidebar-wrapper">
+        <div class="side-menu-wrap">
+            <ul class="main-menu">
+                <li>
+                    <a href="index">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            </span>
+                        <span class="menu-text">
+                                仪表盘
+                            </span>
+                    </a>
+                </li>
+
+                <li th:if="${whoami} == '管理员'" >
+                    <a href="status">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-package"><line x1="16.5" y1="9.4" x2="7.5" y2="4.21"></line><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                            </span>
+                        <span class="menu-text">
+                                设备情况
+                            </span>
+                    </a>
+                </li>
+                <li th:if="${whoami} == '管理员' or ${whoami} == '维修工' " class="active">
+                    <a href="devicemaintain">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+                            </span>
+                        <span class="menu-text">
+                                设备维修
+                            </span>
+                    </a>
+                </li>
+                <li th:if="${whoami} == '管理员'">
+                    <a href="devicesale">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </span>
+                        <span class="menu-text">
+                                设备交易
+                            </span>
+                    </a>
+                </li>
+                <li th:if="${whoami} == '用户'">
+                    <a href="devicebr">
+                            <span class="icon-menu feather-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                            </span>
+                        <span class="menu-text">
+                                借还设备
+                            </span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <!-- Container Start -->
+    <div class="page-wrapper">
+        <div class="main-content">
+            <!-- Page Title Start -->
+            <div class="row">
+                <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-title-wrapper">
+                        <div class="page-title-box">
+                            <h4 class="page-title bold">设备管理系统</h4>
+                        </div>
+                        <div class="breadcrumb-list">
+                            <ul>
+                                <li class="breadcrumb-link">
+                                    <a href="index"><i class="fas fa-home mr-2"></i>设备管理系统</a>
+                                </li>
+                                <li class="breadcrumb-link active">设备维修</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Table Start -->
+            <div class="row">
+                <!-- Styled Table Card-->
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card table-card">
+                        <div class="card-header pb-0">
+                            <h4>设备状态</h4>
+                        </div>
+                        <div class="card-body" >
+                            <div class="chart-holder">
+                                <div class="table-responsive" style="overflow: visible">
+                                    <table class="table table-styled mb-0">
+                                        <thead>
+                                        <tr>
+                                            <th style="text-align: center;">设备ID</th>
+                                            <th style="text-align: center;">设备名称</th>
+                                            <th style="text-align: center;">设备状态</th>
+                                            <th style="text-align: center;">维修负责人</th>
+                                            <th style="text-align: center;">负责人ID</th>
+                                            <th style="text-align: center;">负责人联系方式</th>
+                                            <th style="text-align: center;">更改维修工</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="device_list : ${maintain_device_list}">
+                                            <td style="text-align: center;" th:text="${device_list.getMaintain_device_id()}">#JH2033</td>
+                                            <td style="text-align: center;" th:text="${device_list.getMaintain_device_name()}">设备一号</td>
+                                            <td style="text-align: center;" class="status-light.维修中" >维修中</td>
+                                            <td style="text-align: center;" th:text="${device_list.getFixer_name()}">老王</td>
+                                            <td style="text-align: center;" th:text="${device_list.getFixer_id()}">1231231231231</td>
+                                            <td style="text-align: center;" th:text="${device_list.getFixer_tele()}">老王</td>
+                                            <td class="relative" style="text-align: center">
+                                                <a class="action-btn " href="javascript:void(0); ">
+                                                    <svg class="default-size " viewBox="0 0 341.333 341.333 ">
+                                                        <g>
+                                                            <g>
+                                                                <g>
+                                                                    <path d="M170.667,85.333c23.573,0,42.667-19.093,42.667-42.667C213.333,19.093,194.24,0,170.667,0S128,19.093,128,42.667 C128,66.24,147.093,85.333,170.667,85.333z "></path>
+                                                                    <path d="M170.667,128C147.093,128,128,147.093,128,170.667s19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 S194.24,128,170.667,128z "></path>
+                                                                    <path d="M170.667,256C147.093,256,128,275.093,128,298.667c0,23.573,19.093,42.667,42.667,42.667s42.667-19.093,42.667-42.667 C213.333,275.093,194.24,256,170.667,256z "></path>
+                                                                </g>
+                                                            </g>
+                                                        </g>
+                                                    </svg>
+                                                </a>
+                                                <div class="action-option " style="left: 0;">
+                                                    <ul>
+                                                        <li>
+                                                            <a th:each="get_fixer_list : ${fixer_list}" th:href="'changefixer?Did='+${device_list.getMaintain_device_id()} +'&Fname='+${get_fixer_list.getFName()}"  th:text="${get_fixer_list.getFName()}" style="text-align: center">空闲中</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ad-footer-btm">
+                <p>Copyright © 2021.Company name All rights reserved.<a target="_blank" href="https://sc.chinaz.com/moban/">网页模板</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script Start -->
+<script src="static/js/jquery.min.js"></script>
+<script src="static/js/popper.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/swiper.min.js"></script>
+<script src="static/js/apexcharts.min.js"></script>
+<script src="static/js/control-chart-apexcharts.js"></script>
+<!-- Page Specific -->
+<script src="static/js/nice-select.min.js"></script>
+<!-- Custom Script -->
+<script src="static/js/custom.js"></script>
+</body>
+
+</html>

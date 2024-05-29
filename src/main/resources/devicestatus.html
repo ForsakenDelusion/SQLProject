@@ -71,7 +71,7 @@
                         </a>
                     </li>
                     <li th:if="${whoami} == '管理员' or ${whoami} == '维修工'">
-                        <a href="devicefix">
+                        <a href="devicemaintain">
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-truck"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
                             </span>
@@ -109,7 +109,19 @@
                 <!-- Page Title Start -->
                 <div class="row">
                     <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <hr>
+                        <div class="page-title-wrapper">
+                            <div class="page-title-box">
+                                <h4 class="page-title bold">设备管理系统</h4>
+                            </div>
+                            <div class="breadcrumb-list">
+                                <ul>
+                                    <li class="breadcrumb-link">
+                                        <a href="index"><i class="fas fa-home mr-2"></i>设备管理系统</a>
+                                    </li>
+                                    <li class="breadcrumb-link active">设备状态</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <!-- Table Start -->
@@ -120,9 +132,9 @@
                             <div class="card-header pb-0">
                                 <h4>设备状态</h4>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body" >
                                 <div class="chart-holder">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive" style="overflow: visible">
                                         <table class="table table-styled mb-0">
                                             <thead>
                                             <tr>

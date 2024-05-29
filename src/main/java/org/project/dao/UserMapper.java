@@ -1,10 +1,7 @@
 package org.project.dao;
 
 import org.apache.ibatis.annotations.*;
-import org.project.entity.Admin;
-import org.project.entity.Fixer;
-import org.project.entity.User;
-import org.project.entity.UserBorrowReturn;
+import org.project.entity.*;
 
 import java.util.List;
 
@@ -39,4 +36,24 @@ public interface UserMapper {
 
     @Select("select Fid from Fixer where Fname = #{Fname} ORDER BY Fid ASC LIMIT 1")
     String getFidByFname(String Fname);
+
+    @Delete("delete from Device where Did = #{Did}")
+    void sellDevice(String Did);
+
+    @Select("select Device.Dstatus from Device where Did = #{Did}")
+    String getDeviceStautsById(String Did);
+
+    @Insert("insert into Device(Dname,Dprice) values(#{Dname},#{Dprice})")
+    void buyDevice(@Param("Dname")String Dname,@Param("Dprice")String Dprice);
+
+    @Results({
+            @Result(column = "Did", property = "maintain_device_id"),
+            @Result(column = "Dname", property = "maintain_device_name"),
+            @Result(column = "Fname", property = "fixer_name"),
+            @Result(column = "Fid", property = "fixer_id"),
+            @Result(column = "Ftele", property = "fixer_tele")
+    })
+    @Select("select * from Device,Maintain,Fixer where Did = MDid and MFid = Fid and MdateEnd is NULL")
+    List<MaintainDevice> getMaintainDevice();
+
 }

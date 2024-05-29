@@ -1,12 +1,10 @@
-package org.project.servlet.device;
+package org.project.servlet.pages;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.project.entity.Admin;
-import org.project.entity.User;
 import org.project.service.AdminService;
 import org.project.service.impl.AdminServiceImpl;
 import org.project.utils.ThymeleafUtil;

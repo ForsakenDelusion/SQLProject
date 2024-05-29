@@ -7,6 +7,7 @@ import org.project.dao.UserMapper;
 import org.project.entity.Admin;
 import org.project.entity.Device;
 import org.project.entity.Fixer;
+import org.project.entity.MaintainDevice;
 import org.project.service.AdminService;
 import org.project.utils.MybatisUtil;
 
@@ -76,6 +77,54 @@ public class AdminServiceImpl implements AdminService {
         try (SqlSession sqlSession = MybatisUtil.getSqlSession()) {
             UserMapper mapper = sqlSession.getMapper(UserMapper.class);
             return mapper.getAllFixer();
+        }
+    }
+
+    @Override
+    public void sellDevice(String Did) {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            mapper.sellDevice(Did);
+        }
+    }
+
+    @Override
+    public String getDeviceStatusById(String Did) {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            return  mapper.getDeviceStautsById(Did);
+        }
+    }
+
+    @Override
+    public void buyDevice(String Dname, String Dprice) {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            mapper.buyDevice(Dname,Dprice);
+        }
+    }
+
+    @Override
+    public List<MaintainDevice> getAllMaintainDevice() {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            UserMapper mapper = sqlSession.getMapper(UserMapper.class);
+            return mapper.getMaintainDevice();
+        }
+    }
+
+    @Override
+    public void changefixer(String Did, String Fname) {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            DeviceMapper mapper = sqlSession.getMapper(DeviceMapper.class);
+            mapper.changeDeviceFixer(Did,mapper.getOldestFixerIdByName(Fname));
+        }
+    }
+
+    @Override
+    public String getOldestFixerIdByName(String Fname) {
+        try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
+            DeviceMapper mapper = sqlSession.getMapper(DeviceMapper.class);
+            return mapper.getOldestFixerIdByName(Fname);
         }
     }
 }

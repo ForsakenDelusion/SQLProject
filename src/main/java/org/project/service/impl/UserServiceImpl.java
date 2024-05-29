@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean userBanUrl(HttpServletRequest req) {//禁止用户访问的网页
         String url = req.getRequestURI();
-        return !url.endsWith("project/status") && !url.endsWith("project/setidle") && !url.endsWith("project/setmaintain") && !url.endsWith("project/setuse");
+        return  !url.endsWith("project/selldevice") && !url.endsWith("project/changefixer") && !url.endsWith("project/status") && !url.endsWith("project/setidle") && !url.endsWith("project/setmaintain") && !url.endsWith("project/setuse") && !url.endsWith("/project/devicemaintain") && !url.endsWith("/project/devicesale");
     }
 
     @Override

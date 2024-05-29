@@ -52,6 +52,16 @@ public interface DeviceMapper {
     @Select("select count(*) from Device where Dstatus = '使用中'")
     int getUsingDeviceCount();
 
+    @Select("select * from Device where Dstatus = '维修中'")
+    List<Device> getMaintainDevice();
+
+    @Deprecated
     @Select("select count(*) from Device where Dstatus = '维修中'")
     int getMaintainDeviceCount();
+
+    @Select("select Fid from Fixer where Fname = #{Fname} ORDER BY Fid ASC LIMIT 1")
+    String getOldestFixerIdByName(String Fname);
+
+    @Update("update Maintain set MFid = #{Fid} where MDid = #{Did} and MdateEnd is NULL")
+    void changeDeviceFixer(@Param("Did")String Did,@Param("Fid") String Fid);
 }

@@ -50,7 +50,7 @@
             <div class="side-menu-wrap">
                 <ul class="main-menu">
                     <li>
-                        <a href="index" class="active">
+                        <a href="index">
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                             </span>
@@ -80,7 +80,7 @@
                             </span>
                         </a>
                     </li>
-                    <li th:if="${whoami} == '管理员'">
+                    <li th:if="${whoami} == '管理员'" class="active">
                         <a href="devicesale">
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -91,7 +91,7 @@
                         </a>
                     </li>
                     <li th:if="${whoami} == '用户'">
-                        <a href="borrowreturn">
+                        <a href="devicebr">
                             <span class="icon-menu feather-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                             </span>
@@ -108,54 +108,74 @@
             <div class="main-content">
                 <!-- Page Title Start -->
                 <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="colxl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-title-wrapper">
                             <div class="page-title-box">
-                                <h4 class="page-title">新建借还</h4>
+                                <h4 class="page-title bold">设备管理系统</h4>
                             </div>
                             <div class="breadcrumb-list">
                                 <ul>
                                     <li class="breadcrumb-link">
                                         <a href="index"><i class="fas fa-home mr-2"></i>设备管理系统</a>
                                     </li>
-                                    <li class="breadcrumb-link active">新建借还</li>
+                                    <li class="breadcrumb-link active">设备交易</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- From Start -->
-                <div class="from-wrapper">
-                    <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <form class="separate-form" method="post" action="add-borrow">
-                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h5 class="from-title mb-1">设备选择</h5>
-                                            <div class="row">
-                                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
-                                                    <div class="form-group">
-                                                        <label for="region" class="col-form-label">设备名称</label>
-                                                        <select class="select2 form-control" id="region" name="device_name">
-                                                            <optgroup label="可用设备">
-                                                                <option th:value="${device_name}" th:each="device_name : ${device_name_list}" th:text="${device_name}">Object</option>
-                                                            </optgroup>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </div>
-                                            <div class="form-group mb-0">
-                                                <button class="btn btn-primary" type="submit">提交</button>
-                                            </div>
-                                    </form>
+                <!-- Table Start -->
+                <div class="row">
+                    <!-- Styled Table Card-->
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                        <div class="card table-card">
+                            <div class="card-header pb-0">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <h4>近日购入</h4>
+                                    <div class="add-group">
+                                        <a class="ad-btn" href="buydevice">购买新设备</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-holder">
+                                    <div class="table-responsive">
+                                        <table class="table table-styled mb-0">
+                                            <thead>
+                                            <tr>
+                                                <th style="text-align: center;">设备ID</th>
+                                                <th style="text-align: center;">设备名称</th>
+                                                <th style="text-align: center;">设备状态</th>
+                                                <th style="text-align: center;">设备价格</th>
+                                                <th style="text-align: center;">购买日期</th>
+                                                <th style="text-align: center;">操作</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr th:each="device_list : ${index_device_list}">
+                                                <td style="text-align: center;" th:text="${device_list.getDevice_id()}">#JH2033</td>
+                                                <td style="text-align: center;" th:text="${device_list.getDevice_name()}">设备一号</td>
+                                                <td style="text-align: center;">
+                                                    <span th:text="${device_list.getDevice_status()}">空闲中</span>
+                                                    <span class="status-light" th:classappend="${device_list.getDevice_status()}"></span>
+                                                </td>
+                                                <td style="text-align: center;" th:text="${device_list.getDevice_price()}">$600</td>
+                                                <td style="text-align: center;" th:text="${device_list.getDevice_purchase_date()}">22/19/2</td>
+                                                <td style="text-align: center;">
+                                                    <a th:href="'selldevice?Did='+${device_list.getDevice_id()}" style="background-color: #FFC107; color: white; border-radius: 25px;  padding: 8px 16px; border: none; cursor: pointer;" onmouseover="this.style.backgroundColor='#FFA000';" onmouseout="this.style.backgroundColor='#FFC107';">卖出</a>
+                                                    <!--用？Did=的方式来发出一个get请求以此来达到传递当前列参数的效果-->
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
+
                 <div class="ad-footer-btm">
                     <p>Copyright © 2021.Company name All rights reserved.<a target="_blank" href="https://sc.chinaz.com/moban/">网页模板</a></p>
                 </div>

@@ -2,7 +2,6 @@ package org.project.service.impl;
 
 import org.apache.ibatis.session.SqlSession;
 import org.project.dao.DeviceMapper;
-import org.project.dao.UserMapper;
 import org.project.entity.Device;
 import org.project.service.IndexService;
 import org.project.utils.MybatisUtil;
@@ -39,7 +38,7 @@ public class IndexServiceImpl implements IndexService {
     public int getMaintainDeviceCount() {
         try(SqlSession sqlSession = MybatisUtil.getSqlSession()){
             DeviceMapper mapper = sqlSession.getMapper(DeviceMapper.class);
-            return mapper.getMaintainDeviceCount();
+            return mapper.getMaintainDevice().size();
         }
     }
 }
