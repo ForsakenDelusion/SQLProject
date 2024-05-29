@@ -25,4 +25,24 @@ public interface DeviceMapper {
 
     @Select("select Did from Device where Dname = #{Dname} and Dstatus='空闲中' ORDER BY Did ASC LIMIT 1")
     String getOldestDeviceByName(String Dname);
+
+    @Results({
+            @Result(column = "Did",property = "device_id"),
+            @Result(column = "Dname", property = "device_name"),
+            @Result(column = "Dstatus", property = "device_status")
+    })
+    @Select("select Did,Dname,Dstatus from Device")
+    List<Device> getDeviceStatus();
+
+    @Update("update Device set Dstatus = '空闲中' where Did = #{Did}")
+    void setDeviceIdle(String Did);
+
+    @Update("update Device set Dstatus = '使用中' where Did = #{Did}")
+    void setDeviceUse(String Did);
+
+    @Update("update Device set Dstatus = '维修中' where Did = #{Did}")
+    void setDeviceMaintain(String Did);
+
+    @Update("update Maintain set MFid = #{Fid} where MDid = #{MDid}")
+    void setFixerId(@Param("Fid") String Fid,@Param("MDid") String MDid);
 }

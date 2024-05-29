@@ -19,6 +19,9 @@ public interface UserMapper {
     @Select("select * from Fixer where Fid = #{Fid} and Fpassword = #{Fpassword}")
     Fixer getFixer(@Param("Fid") String Fid, @Param("Fpassword") String Fpassword);
 
+    @Select("select * from Fixer")
+    List<Fixer> getAllFixer();
+
     @Results({
             @Result(column = "BRid", property = "borrow_id"),
             @Result(column = "Did", property = "borrow_device_id"),
@@ -31,4 +34,6 @@ public interface UserMapper {
     @Update("update Device set Dstatus = '空闲中' where Did = #{Did}")
     void returnDevice(String Did);
 
+    @Select("select Fid from Fixer where Fname = #{Fname} ORDER BY Fid ASC LIMIT 1")
+    String getFidByFname(String Fname);
 }

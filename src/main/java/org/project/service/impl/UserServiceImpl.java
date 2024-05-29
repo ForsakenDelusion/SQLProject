@@ -1,5 +1,6 @@
 package org.project.service.impl;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.ibatis.session.SqlSession;
 import org.project.dao.DeviceMapper;
@@ -22,6 +23,12 @@ public class UserServiceImpl implements UserService {
             session.setAttribute("user", user);//如果User不为空，就给一个session
             return true;
         }
+    }
+
+    @Override
+    public boolean userBanUrl(HttpServletRequest req) {//禁止用户访问的网页
+        String url = req.getRequestURI();
+        return !url.endsWith("project/status") && !url.endsWith("project/setidle") && !url.endsWith("project/setmaintain") && !url.endsWith("project/setuse");
     }
 
     @Override

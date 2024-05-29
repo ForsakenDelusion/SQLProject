@@ -111,14 +111,14 @@
                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                         <div class="page-title-wrapper">
                             <div class="page-title-box">
-                                <h4 class="page-title">新建借还</h4>
+                                <h4 class="page-title">选择维修工</h4>
                             </div>
                             <div class="breadcrumb-list">
                                 <ul>
                                     <li class="breadcrumb-link">
                                         <a href="index"><i class="fas fa-home mr-2"></i>设备管理系统</a>
                                     </li>
-                                    <li class="breadcrumb-link active">新建借还</li>
+                                    <li class="breadcrumb-link active">选择维修工</li>
                                 </ul>
                             </div>
                         </div>
@@ -130,25 +130,25 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form class="separate-form" method="post" action="add-borrow">
+                                    <form class="separate-form" method="post" action="setmaintain">
                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                            <h5 class="from-title mb-1">设备选择</h5>
+                                            <h5 class="from-title mb-1">选择维修工</h5>
                                             <div class="row">
                                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
                                                     <div class="form-group">
-                                                        <label for="region" class="col-form-label">设备名称</label>
-                                                        <select class="select2 form-control" id="region" name="device_name">
-                                                            <optgroup label="可用设备">
-                                                                <option th:value="${device_name}" th:each="device_name : ${device_name_list}" th:text="${device_name}">Object</option>
+                                                        <select class="select2 form-control" id="region" name="fixer_name">
+                                                            <optgroup label="维修工">
+                                                                <option th:value="${fixer.getFName()}" th:each="fixer : ${fixer_list}" th:text="${fixer.getFName()}">Object</option>
                                                             </optgroup>
                                                         </select>
+                                                        <input type="hidden" name="Did" th:value="${Did}">
                                                     </div>
                                                 </div>
-                                            </div>
                                             </div>
                                             <div class="form-group mb-0">
                                                 <button class="btn btn-primary" type="submit">提交</button>
                                             </div>
+                                        </div>
                                     </form>
                                 </div>
                             </div>

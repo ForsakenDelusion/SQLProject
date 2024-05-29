@@ -1,21 +1,17 @@
-package org.project.servlet.device;
+package org.project.servlet.device.action;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.project.entity.Admin;
-import org.project.entity.User;
 import org.project.service.AdminService;
 import org.project.service.impl.AdminServiceImpl;
-import org.project.utils.ThymeleafUtil;
-import org.thymeleaf.context.Context;
 
 import java.io.IOException;
 
-@WebServlet("/status")
-public class DeviceStatusServlet extends HttpServlet {
+@WebServlet("/setidle")
+public class SetIdleServlet extends HttpServlet {
 
     AdminService service;
 
@@ -26,11 +22,8 @@ public class DeviceStatusServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Context context = new Context();
-        String whoami;
-        whoami = "管理员";
-        context.setVariable("whoami", whoami);
-        context.setVariable("device_status_list", service.getDeviceStatus());
-        ThymeleafUtil.process("devicestatus.html",context,resp.getWriter());
+        String Did = req.getParameter("Did");//在前端用Thymeleaf获取到的Did值
+        service.setDeviceIdle(Did);
+        resp.sendRedirect("status");
     }
 }
