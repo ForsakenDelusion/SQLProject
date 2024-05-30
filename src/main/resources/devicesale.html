@@ -163,7 +163,7 @@
                                                 <td style="text-align: center;" th:text="${device_list.getDevice_price()}">$600</td>
                                                 <td style="text-align: center;" th:text="${device_list.getDevice_purchase_date()}">22/19/2</td>
                                                 <td style="text-align: center;">
-                                                    <a th:href="'selldevice?Did='+${device_list.getDevice_id()}" style="background-color: #FFC107; color: white; border-radius: 25px;  padding: 8px 16px; border: none; cursor: pointer;" onmouseover="this.style.backgroundColor='#FFA000';" onmouseout="this.style.backgroundColor='#FFC107';">卖出</a>
+                                                    <a th:href="'selldevice?Did='+${device_list.getDevice_id()}" style="white-space: nowrap;background-color: #FFC107; color: white; border-radius: 25px;  padding: 8px 16px; border: none; cursor: pointer;" onmouseover="this.style.backgroundColor='#FFA000';" onmouseout="this.style.backgroundColor='#FFC107'; ">卖出</a>
                                                     <!--用？Did=的方式来发出一个get请求以此来达到传递当前列参数的效果-->
                                                 </td>
                                             </tr>

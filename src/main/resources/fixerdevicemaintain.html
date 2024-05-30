@@ -156,7 +156,7 @@
                                                 <td style="text-align: center;" th:text="${fixer_device.getMaintain_device_name()}">设备一号</td>
                                                 <td style="text-align: center;" th:text="${fixer_device.getMaintain_begin_date()}">22/19/2</td>
                                                 <td style="text-align: center;">
-                                                    <a th:href="'fixdone?Did='+${fixer_device.getMaintain_device_id()}" style="background-color: #4CAF50; color: white; border-radius: 25px;  padding: 8px 16px; border: none; cursor: pointer;" onmouseover="this.style.backgroundColor='#2c612f';" onmouseout="this.style.backgroundColor='#4CAF50';">维修完成</a>
+                                                    <a th:href="'fixdone?Did='+${fixer_device.getMaintain_device_id()}" style="white-space: nowrap; background-color: #4CAF50; color: white; border-radius: 25px;  padding: 8px 16px; border: none; cursor: pointer;" onmouseover="this.style.backgroundColor='#2c612f';" onmouseout="this.style.backgroundColor='#4CAF50';">维修完成</a>
                                                     <!--用？Did=的方式来发出一个get请求以此来达到传递当前列参数的效果-->
                                                 </td>
                                             </tr>
