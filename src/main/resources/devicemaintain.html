@@ -134,7 +134,7 @@
                         </div>
                         <div class="card-body" >
                             <div class="chart-holder">
-                                <div class="table-responsive">
+                                <div class="table-responsive delusion-overflow">
                                     <table class="table table-styled mb-0">
                                         <thead>
                                         <tr>
@@ -169,7 +169,7 @@
                                                         </g>
                                                     </svg>
                                                 </a>
-                                                <div class="action-option " style="white-space: normal">
+                                                <div class="action-option " style="white-space: normal;">
                                                     <ul>
                                                         <li>
                                                             <a th:each="get_fixer_list : ${fixer_list}" th:href="'changefixer?Did='+${device_list.getMaintain_device_id()} +'&Fname='+${get_fixer_list.getFName()}"  th:text="${get_fixer_list.getFName()}" style="text-align: center">空闲中</a>
