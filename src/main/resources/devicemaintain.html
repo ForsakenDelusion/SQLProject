@@ -169,7 +169,7 @@
                                                         </g>
                                                     </svg>
                                                 </a>
-                                                <div class="action-option " style="left: 0; overflow: visible">
+                                                <div class="action-option " style="white-space: normal">
                                                     <ul>
                                                         <li>
                                                             <a th:each="get_fixer_list : ${fixer_list}" th:href="'changefixer?Did='+${device_list.getMaintain_device_id()} +'&Fname='+${get_fixer_list.getFName()}"  th:text="${get_fixer_list.getFName()}" style="text-align: center">空闲中</a>

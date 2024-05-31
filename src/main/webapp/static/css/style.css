@@ -621,6 +621,7 @@ body .table-dark th {
     border-collapse: separate;
     border-spacing: 0 10px;
     margin: -10px 0;
+    white-space: nowrap;
 }
 
 .table-styled thead th,
@@ -732,7 +733,7 @@ svg.default-size {
 .action-option {
     position: absolute;
     top: 10px;
-    left: -120px;
+    left: -10px;
     background-color: var(--primary);
     width: 120px;
     padding: 10px 0;
