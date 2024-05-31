@@ -11,6 +11,7 @@ import org.project.utils.ThymeleafUtil;
 import org.thymeleaf.context.Context;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/buydevice")
 public class BuyDeviceServlet extends HttpServlet {
@@ -31,6 +32,15 @@ public class BuyDeviceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String Dname = req.getParameter("device-name");
         String Dprice = req.getParameter("device-price");
+        if(Dname==null||Dprice==null){
+            resp.setContentType("text/html");
+            PrintWriter out = resp.getWriter();
+            out.println("<script>");
+            out.println("alert('请输入完整信息');");
+            out.println("window.location.href = 'buydevice';");
+            out.println("</script>");
+            out.flush();
+        }
         service.buyDevice(Dname,Dprice);
         resp.sendRedirect("devicesale");
     }
